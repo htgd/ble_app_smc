@@ -1,0 +1,17 @@
+
+ pc-nrfutil的安装与密钥的生成
+1. 所在文件夹使用cmd指令安装
+python setup.py install
+
+2.生成private.key文件
+nrfutil.exe keys generate D:\keil_workspace\NORDIC\key
+
+3.生成公钥C文件（public_key.c）指令
+nrfutil keys display --key pk --format code D:\keil_workspace\NORDIC\key\private.key --out_file D:\keil_workspace\NORDIC\key\public_key.c
+
+
+4.生成升级包和bl_setting文件
+nrfutil pkg generate --hw-version 52 --application-version 1 --application app2.hex --sd-req 0xa8 --key-file private.key gnt2_Dfu15.zip
+
+nrfutil settings generate --family NRF52 --application app2.hex --application-version 1 --bootloader-version 1 --bl-settings-version 1 app2_setting.hex
+
